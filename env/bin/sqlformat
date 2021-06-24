@@ -1,5 +1,5 @@
 #!/bin/sh
-'''exec' "/Users/Milan/Documents/GitHub/Django Apps/Frequency/env/bin/python3" "$0" "$@"
+'''exec' "/Users/Milan/Documents/GitHub/Django Apps/Frequency App/env/bin/python3" "$0" "$@"
 ' '''
 # -*- coding: utf-8 -*-
 import re

@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/Milan/Documents/GitHub/Django Apps/Frequency/env"
+set -gx VIRTUAL_ENV "/Users/Milan/Documents/GitHub/Django Apps/Frequency App/env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

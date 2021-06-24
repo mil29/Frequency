@@ -1,4 +1,4 @@
-#!/Users/Milan/Documents/GitHub/Django Apps/Frequency/env/bin/python3
+#!/Users/Milan/Documents/GitHub/Django Apps/Frequency App/env/bin/python3
 # When the django-admin.py deprecation ends, remove this script.
 import warnings
 
