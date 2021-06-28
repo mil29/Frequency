@@ -1,8 +1,19 @@
+<<<<<<< HEAD
 from django.contrib.auth.models import AbstractUser, BaseUserManager 
+=======
+from django.contrib.auth.models import AbstractUser
+>>>>>>> 1ca64061ed8dc878427201313d0a6c544b396da6
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+class CustomUser(AbstractUser):
+    email = models.EmailField(max_length=255, unique=True)
+    is_active = models.BooleanField(default=True)
 
+    def __str__(self):
+        return self.username
+
+<<<<<<< HEAD
 
 class UserManager(BaseUserManager):
     """Define a model manager for User model with no username field."""
@@ -47,3 +58,5 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+=======
+>>>>>>> 1ca64061ed8dc878427201313d0a6c544b396da6
