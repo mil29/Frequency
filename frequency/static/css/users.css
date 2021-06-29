@@ -1,11 +1,11 @@
-.register_card {
+.authentication_card {
     text-align: center;
 }
 #hint_id_password2 {
     visibility: hidden;
 }
 
-.register_card {
+.authentication_card {
     background-color: rgb(60, 46, 72);
 }
 .card-signin {

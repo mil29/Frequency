@@ -3,6 +3,7 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import login
 from django.contrib import messages
 
+
 def register(request):
 	if request.method == "POST":
 		form = CustomUserCreationForm(request.POST)
@@ -12,6 +13,7 @@ def register(request):
 			messages.success(request, "Registration successful." )
 			return redirect("home")
 		messages.error(request, "Unsuccessful registration. Invalid information.")
-	form = CustomUserCreationForm
+	else:
+		form = CustomUserCreationForm()
 	return render (request=request, template_name="users/register.html", context={"form":form})
 
