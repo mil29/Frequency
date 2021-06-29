@@ -1,0 +1,11 @@
+.text-center {
+    color: rgb(86, 86, 96);
+    font-size: larger;
+}
+
+/* Removes help text in register form */
+
+
+.help-block ul li {
+    visibility: hidden;
+}

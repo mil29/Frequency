@@ -37,17 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    #my add-ons
+    'crispy_forms',
+
     #my apps
     'feed',
     'users',
 ]
 
-<<<<<<< HEAD
 AUTH_USER_MODEL = 'users.User'
-=======
-AUTH_USER_MODEL = 'users.CustomUser'
-
->>>>>>> 1ca64061ed8dc878427201313d0a6c544b396da6
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -128,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'staticfiles_project'),]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn', 'static_root')
 
 MEDIA_URL = '/media/'
