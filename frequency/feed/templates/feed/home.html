@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Frequency</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+
      <h1>Frequency App</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <img src="{% static 'img/eq.jpeg' %}" class="img-fluid">
+            </div>
+        </div>
+    </div>
 
 <a href="{% url 'logout' %}"><b>Logout</b></a>
 
-    
-</body>
-</html>
+
+
+{% endblock %}
+

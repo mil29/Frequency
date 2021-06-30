@@ -4,7 +4,7 @@ from .models import User
 
 
 class CustomUserCreationForm(UserCreationForm):
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput, help_text="Minimum of 8 characters")
 
     class Meta:
         model = User
