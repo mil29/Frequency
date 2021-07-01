@@ -1,6 +1,8 @@
 from decimal import Decimal
 from django.db import models
 from django.utils.datetime_safe import datetime
+from django.urls import reverse
+from django.template.defaultfilters import slugify
 
 
 
@@ -32,9 +34,23 @@ class Track(models.Model):
     description = models.TextField(max_length=250, null=True)
     artist      = models.CharField(max_length=250)
     timestamp   = models.DateTimeField(auto_now_add=True)
+    slug        = models.SlugField(null=True, unique=True)
 
     def __str__(self):
         return 'title:{} description:{} artist:{}'.format(self.title, self.description, self.artist)
+
+
+    def get_absolute_url(self):
+        return reverse('track_detail', kwargs={'slug': self.slug})
+
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super(Track, self).save(*args, **kwargs)
+    
+
+
 
 
 
