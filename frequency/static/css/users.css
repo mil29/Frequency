@@ -18,3 +18,8 @@ input {
 .control-label {
     margin: 15px;
 }
+
+.user_create_forms {
+    background-color: rgb(60, 46, 72);
+    text-align: center;
+}

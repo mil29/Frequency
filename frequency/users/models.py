@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser, BaseUserManager 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.template.defaultfilters import slugify
+from django.utils.datetime_safe import datetime
 
 
 class UserManager(BaseUserManager):
@@ -40,9 +42,29 @@ class User(AbstractUser):
     """User model."""
 
     username = None
-    email = models.EmailField(_('email address'), unique=True)
+    email    = models.EmailField(_('email address'), unique=True)
+    slug     = models.SlugField(null=True, unique=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.first_name)
+        return super(User, self).save(*args, **kwargs)
+
+
     objects = UserManager()
+
+
+
+class Profile(models.Model):
+    bio         = models.TextField(max_length=350, blank=True, null=True)
+    pic         = models.ImageField(upload_to='profile_pics', default='default.jpeg')
+    timestamp   = models.DateTimeField(auto_now_add=True)
+    updated     = models.DateTimeField(auto_now=True)
+
+    def _str__(self):
+        return self.bio
+    
+
