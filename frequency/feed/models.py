@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.datetime_safe import datetime
 from django.urls import reverse
 from users.models import User
-
+from django.template.defaultfilters import slugify
 
 
 
@@ -11,8 +11,8 @@ class Instrument(models.Model):
     title     = models.CharField(max_length=120)
     timestamp = models.DateTimeField(auto_now_add=True)
     updated   = models.DateTimeField(auto_now=True)
-    track     = models.ForeignKey('Track', on_delete=models.CASCADE)
-    artist    = models.ForeignKey(User, on_delete=models.CASCADE)
+    track     = models.ForeignKey('Track', on_delete=models.CASCADE, null=True)
+    artist    = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return 'title:{} track:{} artist:{}'.format(self.title, self.track, self.artist)
@@ -40,14 +40,19 @@ class Track(models.Model):
     timestamp   = models.DateTimeField(auto_now_add=True)
     updated     = models.DateTimeField(auto_now=True)
     user        = models.ForeignKey(User, on_delete=models.CASCADE)
+    slug        = models.SlugField(null=True, unique=True)
 
     def __str__(self):
         return 'title:{} description:{} artist:{} user:{}'.format(self.title, self.description, self.artist, self.user)
 
 
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super(Track, self).save(*args, **kwargs)
 
 
-    
+
 
 
 

@@ -1,0 +1,37 @@
+.profile-img {
+    flex-shrink: 0;
+    height: 200px;
+    width: 200px;
+    border: 1px solid black;
+}
+.profile-card {
+    text-align: center;
+}
+
+.profile-img-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+    text-align: center;
+    background-color: rgb(66, 66, 66);
+    color: beige;
+    font-size: larger;
+}
+
+
+.profile {  /* profile links container */
+    margin-top: 40px;
+}
+.profile-links {  /* profile links */
+    height: fit-content;
+    display: inline-flex;
+    justify-content: space-between;
+}
+
+.one-track {
+    height: 250px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}

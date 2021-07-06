@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Track
+from .models import Track, Instrument
 from .forms import TrackCreateForm, InstrumentCreateForm, EQCreateForm
-from users.models import User
+from users.models import User, Profile
+from django.urls import reverse
 
 
 @login_required
@@ -16,24 +17,15 @@ def profile(request, slug):
     slug = User.objects.get(slug=slug)
     u = request.user
     tracks = Track.objects.all().filter(user=u)
+    profile = Profile.objects.all().filter(user_profile=u)
     context = {
         'u': u,
         'tracks': tracks,
+        'profile': profile,
     }
     return render(request, 'feed/profile.html', context)
 
     
-
-@login_required
-def track_detail(request, slug):
-    u = request.user
-    tracks = Track.objects.all().filter(user=u)
-    context = {
-        'u': u,
-        'tracks': tracks,
-    }
-    return render(request, 'feed/track_detail.html', context)
-
 
 @login_required
 def create_track(request, slug):
@@ -51,15 +43,17 @@ def create_track(request, slug):
 
 
 @login_required
-def create_instrument(request, slug):
+def create_instrument(request, slug, id):
     user = request.user
+    track = get_object_or_404(Track, id=id)
     if request.method == "POST":
         form = InstrumentCreateForm(request.POST)
         if form.is_valid():
             data = form.save(commit=False)
-            data.user = user
+            data.artist = user
+            data.track = track
             data.save()
-            return redirect('profile')
+            return redirect('instrument_detail', slug=track.slug, id=track.id)
     else:
         form = InstrumentCreateForm()
     return render(request, 'feed/create_instrument.html', {'form': form })
@@ -78,6 +72,33 @@ def create_eq(request, slug):
         form = EQCreateForm()
     return render(request, 'feed/create_eq.html', {'form': form })
 
+
+@login_required
+def track_detail(request, slug):
+    u = request.user
+    tracks = Track.objects.all().filter(user=u)
+    context = {
+        'u': u,
+        'tracks': tracks,
+    }
+    return render(request, 'feed/track_detail.html', context)
+
+
+@login_required
+def instrument_detail(request, slug, id):
+    user = request.user
+    track = get_object_or_404(Track, id=id)
+    my_inst = Instrument.objects.filter(track_id=track.id)
+    if my_inst.exists():
+        instruments = Instrument.objects.filter(track_id=track.id)
+        context = {
+            'instruments': instruments,
+            'track': track,
+        }
+        return render(request, 'feed/instrument_detail.html', context)
+    else:
+        print('There are no instruments set in your track')
+        return redirect('create_instrument', slug=track.slug, id=track.id)
 
 
 

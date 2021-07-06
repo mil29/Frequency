@@ -59,10 +59,11 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
-    bio         = models.TextField(max_length=350, blank=True, null=True)
-    pic         = models.ImageField(upload_to='profile_pics', default='default.jpeg')
-    timestamp   = models.DateTimeField(auto_now_add=True)
-    updated     = models.DateTimeField(auto_now=True)
+    bio          = models.TextField(max_length=350, blank=True, null=True)
+    pic          = models.ImageField(upload_to='profile_pics', default='default.jpeg')
+    timestamp    = models.DateTimeField(auto_now_add=True)
+    updated      = models.DateTimeField(auto_now=True)
+    user_profile = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def _str__(self):
         return self.bio
