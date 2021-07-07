@@ -13,9 +13,16 @@ class Instrument(models.Model):
     updated   = models.DateTimeField(auto_now=True)
     track     = models.ForeignKey('Track', on_delete=models.CASCADE, null=True)
     artist    = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    slug      = models.SlugField(null=True, unique=True)
 
     def __str__(self):
         return 'title:{} track:{} artist:{}'.format(self.title, self.track, self.artist)
+
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        return super(Instrument, self).save(*args, **kwargs)
 
 
 class EQ(models.Model):

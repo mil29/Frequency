@@ -1,5 +1,6 @@
 from django import forms 
 from .models import Instrument, EQ, Track
+from feed.widgets import RangeInput
 
 
 
@@ -16,7 +17,10 @@ class InstrumentCreateForm(forms.ModelForm):
 
 
 class EQCreateForm(forms.ModelForm):
+    frequency = forms.DecimalField(label='Frequency (Hz - kHz)', widget=RangeInput(attrs={'type':'range', 'step': '2' }))
+    boost = forms.DecimalField(label='Boost (db)', widget=RangeInput(attrs={'type':'range', 'step': '2' }))
+    cut   = forms.DecimalField(label='Cut (db)', widget=RangeInput(attrs={'type':'range', 'step': '2' }))
+
     class Meta:
         model = EQ
-        fields = ['frequency', 'boost', 'cut']
-
+        fields = ['description', 'frequency', 'boost', 'cut']

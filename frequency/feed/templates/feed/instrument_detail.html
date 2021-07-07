@@ -17,7 +17,7 @@
 
             <div class="col">
                 <div class="card one-track">
-                    <a href=""><h5>{{ items.title }}</h5></a>
+                    <a href="{% url 'eq_detail' track.slug items.slug track.id %}"><h5>{{ items.title }}</h5></a>
                 </div>
             </div>
 
@@ -26,6 +26,7 @@
         
 {% else %}
 
+<a href="{% url 'create_instrument' track.slug track.id %}"><b>Add Instrument</b></a>
 
 {% endif %}
 

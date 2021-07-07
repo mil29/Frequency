@@ -11,7 +11,6 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ['first_name', 'last_name', 'email', 'password1', 'password2']
   
 
-    
 class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
