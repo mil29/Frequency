@@ -3,21 +3,21 @@
 
 <h3>My EQ</h3>
 
-<a href="{% url 'instrument_detail' track.slug track.id %}"><b>Back To Instruments</b></a>
+<a href="{% url 'instrument_detail' instrument.track.slug instrument.track.id %}"><b>Back To Instruments</b></a>
 <br>
-
+<a href="{% url 'create_eq' instrument.track.slug instrument.slug instrument.id %}"><b>Add EQ</b></a>
 <br>
 
 <div class="container my-tracks">
     
-    {% if eqs|length >= 1 %}
 
     <div class="row row-cols-3 row-cols-md-2 g-4">
         {% for item in eqs %}
 
             <div class="col">
                 <div class="card one-track">
-                <h5>Eq:   {{ item.id }} </h5>
+                <h5>Eq:   {{ forloop.counter }} </h5>
+                <h5>Instrument:   {{ item.instrument.title }} </h5>
                 <h5>Frequency:   {{ item.frequency }}</h5>
                 <h5>Boost:   {{ item.boost }}</h5>
                 <h5>Cut:   {{ item.cut }}</h5>
@@ -28,11 +28,8 @@
         {% endfor %}
     </div>
 
-    {% else %}
+ 
 
-        <a href="{% url 'create_eq' track.slug instrument.slug track.id %}"><b>Add EQ</b></a>
-
-    {% endif %}
 </div>
 
 

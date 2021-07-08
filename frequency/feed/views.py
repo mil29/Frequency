@@ -61,7 +61,6 @@ def create_instrument(request, track_slug, id):
 @login_required
 def create_eq(request, track_slug, instrument_slug, id):
     user = request.user
-    track = get_object_or_404(Track, id=id)
     instrument = get_object_or_404(Instrument, id=id)
     if request.method == "POST":
         form = EQCreateForm(request.POST)
@@ -69,9 +68,9 @@ def create_eq(request, track_slug, instrument_slug, id):
             data = form.save(commit=False)
             data.user_name = user
             data.instrument = instrument
-            data.track = track
+            data.track = instrument.track
             data.save()
-            return redirect('profile', slug=user.slug)
+            return redirect('eq_detail', track_slug=instrument.track.slug, instrument_slug=instrument.slug, id=instrument.id)
     else:
         form = EQCreateForm()
     return render(request, 'feed/create_eq.html', {'form': form })
@@ -93,13 +92,10 @@ def instrument_detail(request, track_slug, id):
     user = request.user
     track = get_object_or_404(Track, id=id)
     my_inst = Instrument.objects.filter(track_id=track.id)
-    instrument_obj = get_object_or_404(Instrument, id=id)
     if my_inst.exists():
-        instruments = Instrument.objects.filter(track_id=track.id)
         context = {
-            'instruments': instruments,
+            'instruments': my_inst,
             'track': track,
-            'instrument': instrument_obj,
         }
         return render(request, 'feed/instrument_detail.html', context)
     else:
@@ -110,14 +106,14 @@ def instrument_detail(request, track_slug, id):
 @login_required
 def eq_detail(request, track_slug, instrument_slug, id):
     user = request.user
-    track = get_object_or_404(Track, id=id)
     instrument = get_object_or_404(Instrument, id=id)
-    my_inst = Instrument.objects.filter(track_id=track.id)
     eqs = EQ.objects.filter(instrument_id=instrument.id)
-    context = {
-        'track': track,
-        'instrument': instrument,
-        'eqs': eqs,
-    }
-    return render(request, 'feed/eq_detail.html', context)
+    if eqs.exists():
+        context = {
+            'instrument': instrument,
+            'eqs': eqs,
+        }
+        return render(request, 'feed/eq_detail.html', context)
+    else:
+        return redirect('create_eq', track_slug=instrument.track.slug, instrument_slug=instrument.slug, id=instrument.id)
 

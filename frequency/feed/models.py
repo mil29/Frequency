@@ -13,7 +13,7 @@ class Instrument(models.Model):
     updated   = models.DateTimeField(auto_now=True)
     track     = models.ForeignKey('Track', on_delete=models.CASCADE, null=True)
     artist    = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    slug      = models.SlugField(null=True, unique=True)
+    slug      = models.SlugField(null=True, unique=False)
 
     def __str__(self):
         return 'title:{} track:{} artist:{}'.format(self.title, self.track, self.artist)
@@ -50,7 +50,7 @@ class Track(models.Model):
     slug        = models.SlugField(null=True, unique=True)
 
     def __str__(self):
-        return 'title:{} description:{} artist:{} user:{}'.format(self.title, self.description, self.artist, self.user)
+        return 'id:{} title:{} description:{} artist:{} user:{}'.format(self.id, self.title, self.description, self.artist, self.user)
 
 
     def save(self, *args, **kwargs):

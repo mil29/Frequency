@@ -5,6 +5,8 @@
 
 <a href="{% url 'profile' user.slug %}"><b>Back To Profile</b></a>
 <br>
+<a href="{% url 'track_detail' user.slug %}"><b>Back To Tracks</b></a>
+<br>
 <a href="{% url 'create_instrument' track.slug track.id %}"><b>Add Instrument</b></a>
 <br>
 
@@ -13,11 +15,11 @@
 {% if instruments|length >= 1 %}
     
     <div class="row row-cols-3 row-cols-md-2 g-4">
-        {% for items in instruments %}
+        {% for item in instruments %}
 
             <div class="col">
                 <div class="card one-track">
-                    <a href="{% url 'eq_detail' track.slug items.slug track.id %}"><h5>{{ items.title }}</h5></a>
+                    <a href="{% url 'eq_detail' track.slug item.slug item.id %}"><h5>{{ item.title }}</h5></a>
                 </div>
             </div>
 
