@@ -17,7 +17,7 @@ class InstrumentCreateForm(forms.ModelForm):
 
 
 class EQCreateForm(forms.ModelForm):
-    frequency = forms.DecimalField(label='Frequency (Hz - kHz)', widget=RangeInput(attrs={'type':'range', 'step': '2' }))
+    frequency = forms.DecimalField(label='Frequency (Hz - kHz)', widget=RangeInput(attrs={'type':'range', 'step': '1' }))
     boost = forms.DecimalField(label='Boost (db)', widget=RangeInput(attrs={'type':'range', 'step': '2' }))
     cut   = forms.DecimalField(label='Cut (db)', widget=RangeInput(attrs={'type':'range', 'step': '2' }))
 

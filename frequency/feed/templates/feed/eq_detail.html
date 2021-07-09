@@ -18,6 +18,9 @@
                 <div class="card one-track">
                 <h5>Eq:   {{ forloop.counter }} </h5>
                 <h5>Instrument:   {{ item.instrument.title }} </h5>
+                {% if item.description %}
+                <h5>description:   {{ item.description }}</h5>
+                {% endif %}
                 <h5>Frequency:   {{ item.frequency }}</h5>
                 <h5>Boost:   {{ item.boost }}</h5>
                 <h5>Cut:   {{ item.cut }}</h5>
