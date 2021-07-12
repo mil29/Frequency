@@ -12,9 +12,20 @@
                         {% csrf_token %}
 
                         <fieldset class="form-group"><br>
+                        <h5>Description</h5>
+                           {{ form.description }}
+                           <h5>Frequency</h5>
+                           <input type="text" id='frequencyInput' placeholder='Hz - kHz'>
+                           <p><span id="frequencydemo" class="hidden"></span></p>
+                           {{ form.frequency }} 
+                           <h5>Boost</h5>
+                           <p><span id="boostdemo"></span> db</p>
+                           {{ form.boost }}
+                           <h5>Cut</h5>
+                           <p><span id="cutdemo"></span> db</p>
+                           {{ form.cut }}
 
-                           {{ form|crispy }}
-                        
+                
 
                         </fieldset>
 
@@ -24,6 +35,10 @@
                         </div>
 
                         </form>
+                        <br>
+                        <button class="btn btn-info" type="submit">
+                        <a href="{% url 'track_detail' user.slug %}">Back to My Tracks</a>
+                        </button>
 
                 </div>
             </div>

@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% load static %}
 {% block content %}
 
-<h3>Instruments</h3>
+<h3 class="titles">Instruments</h3>
 
 <a href="{% url 'profile' user.slug %}"><b>Back To Profile</b></a>
 <br>
@@ -21,6 +21,7 @@
                 <div class="card one-track">
                     <a href="{% url 'eq_detail' track.slug item.slug item.id %}"><h5>{{ item.title }}</h5></a>
                 </div>
+                <a href="{% url 'instrument_delete' item.id %}"><b>Delete</b></a>
             </div>
 
         {% endfor %}

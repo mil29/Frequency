@@ -4,6 +4,7 @@ from .models import Track, Instrument, EQ
 from .forms import TrackCreateForm, InstrumentCreateForm, EQCreateForm
 from users.models import User, Profile
 from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 @login_required
@@ -116,4 +117,18 @@ def eq_detail(request, track_slug, instrument_slug, id):
         return render(request, 'feed/eq_detail.html', context)
     else:
         return redirect('create_eq', track_slug=instrument.track.slug, instrument_slug=instrument.slug, id=instrument.id)
+
+
+@login_required
+def eq_delete(request, id):
+    eq_obj = get_object_or_404(EQ, id=id)
+    eq_obj.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+@login_required
+def instrument_delete(request, id):
+    inst_obj = get_object_or_404(Instrument, id=id)
+    inst_obj.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 

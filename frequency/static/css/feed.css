@@ -19,6 +19,9 @@
     font-size: larger;
 }
 
+.titles {
+    text-align: center;
+}
 
 .profile {  /* profile links container */
     margin-top: 40px;
@@ -34,4 +37,25 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+}
+
+#id_description {
+    resize: none;
+}
+#frequencyInput {
+    width: fit-content;
+}
+
+.hidden {
+    display: none;
+}
+
+input#frequencyRange {
+    width: 100%;
+}
+input#boostRange {
+    width: 100%;
+}
+input#cutRange {
+    width: 100%;
 }
