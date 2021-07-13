@@ -66,6 +66,6 @@ class Profile(models.Model):
     user_profile = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def _str__(self):
-        return self.bio
+        return self.first_name
     
 

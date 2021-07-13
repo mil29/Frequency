@@ -4,25 +4,42 @@
 {% block content %}
 
 
+<div class="container home_page">
+
      <h1>Frequency App</h1>
 
     <div class="container">
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-md-10 col-lg-8  mx-auto">
                 <img src="{% static 'img/eq.jpeg' %}" class="img-fluid">
             </div>
         </div>
     </div>
 
-<a href="{% url 'logout' %}"><b>Logout</b></a>
 
-<br>
+<div class="container">
+
+
+<div class="row">
+<div class="col-8 mx-auto">
+
+<div class="card home-card">
+<div class="card-body profile-links">
 <br>
 
 <a href="{% url 'profile' user.slug %}"><b>Profile</b></a>
 
 
+<a href="{% url 'logout' %}"><b>Logout</b></a>
 
+<br>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
 
 {% endblock %}
 
