@@ -20,6 +20,7 @@
                 <div class="card one-track">
                     <a href="{% url 'instrument_detail' track.slug track.id %}"><h5>{{ track.title }}</h5></a>
                 </div>
+                <a href="{% url 'track_delete' track.id %}"><b>Delete</b></a>
             </div>
 
         {% endfor %}

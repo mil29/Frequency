@@ -47,7 +47,64 @@
 
 
 
+<div class="container_charts">
+
+<canvas id="myChart" width="20" height="5"></canvas>
+
+</div>
 
 
 
 {% endblock content %}
+
+
+
+{% block jsfiles %}
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Boost', 'Cut'],
+        datasets: [{
+            label: '',
+            data: ['{{ track_boost.boost__sum }}', '{{ track_cut.cut__sum }}'],
+            backgroundColor: [
+                'rgba(109, 89, 122)',
+                'rgba(53, 80, 112)',
+            ],
+            borderColor: [
+                'rgba(53, 53, 53)',
+
+            ],
+            borderWidth: 1,
+            hoverBorderWidth: 2,
+            hoverBorderColor: 'rgba(22, 26, 29)',
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            title: {
+                display: true,
+                text: "Total Boost & Cut for all Tracks",
+                font: {
+                    size: 20,
+                },
+            },
+        }
+    }
+});
+</script>
+
+{% endblock jsfiles %}

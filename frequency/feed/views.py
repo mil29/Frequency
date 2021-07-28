@@ -5,7 +5,7 @@ from .forms import TrackCreateForm, InstrumentCreateForm, EQCreateForm
 from users.models import User, Profile
 from django.urls import reverse
 from django.http import HttpResponseRedirect
-
+from django.db.models import Sum
 
 @login_required
 def home(request):
@@ -93,10 +93,15 @@ def instrument_detail(request, track_slug, id):
     user = request.user
     track = get_object_or_404(Track, id=id)
     my_inst = Instrument.objects.filter(track_id=track.id)
+    eq_boost_all = EQ.objects.filter(track_id=track.id)
+    track_boost = eq_boost_all.aggregate(Sum('boost'))
+    track_cut = eq_boost_all.aggregate(Sum('cut'))
     if my_inst.exists():
         context = {
             'instruments': my_inst,
             'track': track,
+            'track_boost': track_boost,
+            'track_cut': track_cut,
         }
         return render(request, 'feed/instrument_detail.html', context)
     else:
@@ -109,10 +114,15 @@ def eq_detail(request, track_slug, instrument_slug, id):
     user = request.user
     instrument = get_object_or_404(Instrument, id=id)
     eqs = EQ.objects.filter(instrument_id=instrument.id)
+    inst_boost = eqs.aggregate(Sum('boost'))
+    inst_cut = eqs.aggregate(Sum('cut'))
+
     if eqs.exists():
         context = {
             'instrument': instrument,
             'eqs': eqs,
+            'inst_boost': inst_boost,
+            'inst_cut': inst_cut,
         }
         return render(request, 'feed/eq_detail.html', context)
     else:
@@ -131,4 +141,8 @@ def instrument_delete(request, id):
     inst_obj.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-
+@login_required
+def track_delete(request, id):
+    inst_obj = get_object_or_404(Track, id=id)
+    inst_obj.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
