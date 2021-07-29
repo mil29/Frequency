@@ -65,6 +65,7 @@
 var ctx = document.getElementById('myChart').getContext('2d');
 
 
+
 var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -88,8 +89,12 @@ var myChart = new Chart(ctx, {
     options: {
         scales: {
             y: {
-                beginAtZero: true
-            }
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'db'
+                }
+            },
         },
         plugins: {
             legend: {
@@ -97,14 +102,15 @@ var myChart = new Chart(ctx, {
             },
             title: {
                 display: true,
-                text: "Total Boost & Cut for all Tracks",
+                text: "Total for all Tracks (db)",
                 font: {
                     size: 20,
                 },
             },
-        }
+        },
     }
 });
 </script>
+
 
 {% endblock jsfiles %}
