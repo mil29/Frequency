@@ -6,6 +6,7 @@ from users.models import User, Profile
 from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.db.models import Sum
+from collections import Counter
 
 @login_required
 def home(request):
@@ -117,12 +118,48 @@ def eq_detail(request, track_slug, instrument_slug, id):
     inst_boost = eqs.aggregate(Sum('boost'))
     inst_cut = eqs.aggregate(Sum('cut'))
 
+
+    # code to find a build up of frequencies in a certain range 
+
+    # this code below sets a range in a and b and the in d loops through the range every 50 and creates a list in d
+    f = 1
+    a = -10000
+    b = 25000
+    d = [x * f for x in range(a,b,50)]
+    # print(d)
+
+    #  this will find the frequency entries within the model for a particular instrument a give a back a list
+    frequencies = EQ.objects.filter(instrument_id=instrument.id).values_list('frequency', flat=True)
+
+    #  this loops through the list above called d which is a large range of numbers spaced by 50 and also loops through the frequency entries in the model for the instrument checks whether the entry is within a range of 50 and adds to list called clashing_freq , the the counter counts the number of times a entry comes up in the list 'clashCounter'
+    clashing_freq = []
+    for num in d:
+        for freq in frequencies:
+            y = num + 50
+            if freq in range(num, y) and num != 0:
+                clashing_freq.append(num)
+            continue
+    # print(clashing_freq)
+    clashCounter = Counter(clashing_freq)
+    # print(clashCounter)
+
+    #  this adds the key and values into seperate lists from the classCounter dictionary above
+    clashFreq = []
+    clashNo = []
+    for key, value in clashCounter.items():
+        if value > 1:
+            clashFreq.append(key)
+            clashNo.append(value)
+
+
     if eqs.exists():
         context = {
             'instrument': instrument,
             'eqs': eqs,
             'inst_boost': inst_boost,
             'inst_cut': inst_cut,
+            'clashFreq': clashFreq,
+            'clashNo': clashNo,
         }
         return render(request, 'feed/eq_detail.html', context)
     else:

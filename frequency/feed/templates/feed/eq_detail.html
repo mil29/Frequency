@@ -46,9 +46,16 @@
 
 
 <div class="container_charts">
+    
+    <canvas id="myChart" width="20" height="5"></canvas>
+    
+</div>
 
-<canvas id="myChart" width="20" height="5"></canvas>
 
+<div class="container_charts">
+    
+    <canvas id="myChart2" width="20" height="5"></canvas>
+    
 </div>
 
 
@@ -58,9 +65,12 @@
 
 
 
+
 {% block jsfiles %}
 
 <script>
+
+
 var ctx = document.getElementById('myChart').getContext('2d');
 
 
@@ -108,6 +118,58 @@ var myChart = new Chart(ctx, {
         }
     }
 });
+
+
+
+
+var ctx = document.getElementById('myChart2').getContext('2d');
+
+
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for freq in clashFreq %} '{{ freq }}', {% endfor %}],
+        datasets: [{
+            label: '',
+            data: [{% for number in clashNo %} '{{ number }}', {% endfor %}],
+            backgroundColor: [
+                'rgba(181, 228, 140)',
+                'rgba(52, 160, 164)',
+            ],
+            borderColor: [
+                'rgba(53, 53, 53)',
+            ],
+            borderWidth: 1,
+            hoverBorderWidth: 2,
+            hoverBorderColor: 'rgba(22, 26, 29)',
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Instances'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            title: {
+                display: true,
+                text: "Frequency Build Ups",
+                font: {
+                    size: 20,
+                },
+            },
+        }
+    }
+});
+
 </script>
 
 {% endblock jsfiles %}
