@@ -45,16 +45,28 @@
 
 
 
-<div class="container_charts">
-    
-    <canvas id="myChart" width="20" height="5"></canvas>
-    
-</div>
-
 
 <div class="container_charts">
+
+    <div class="row row-cols-2">
+
+            <div class="col">
+            
+                <canvas id="myChart" width="20" height="15"></canvas>
+            
+            </div>
+
+            {% if clashFreq|length >= 1 %}
+            <div class="col">
+            
+                <canvas id="myChart2" width="20" height="15"></canvas>
+            
+            
+            </div>
+            {% endif %}
+
+    </div>
     
-    <canvas id="myChart2" width="20" height="5"></canvas>
     
 </div>
 
@@ -161,7 +173,7 @@ var myChart = new Chart(ctx, {
             },
             title: {
                 display: true,
-                text: "Frequency Build Ups",
+                text: "Clashing Frequencies for Instrument",
                 font: {
                     size: 20,
                 },

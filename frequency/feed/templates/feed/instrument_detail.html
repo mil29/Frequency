@@ -21,7 +21,7 @@
 
             <div class="col mb-4">
                 <div class="card one-track">
-                    <a href="{% url 'eq_detail' track.slug item.slug item.id %}"><h5>{{ item.title }}</h5></a>
+                    <a class="links_card" href="{% url 'eq_detail' track.slug item.slug item.id %}"><h5>{{ item.title }}</h5></a>
                 </div>
                 <a href="{% url 'instrument_delete' item.id %}"><b>Delete</b></a>
             </div>
@@ -41,17 +41,35 @@
 
 
 
-
-
 </div>
 
 
 
 <div class="container_charts">
 
-<canvas id="myChart" width="20" height="5"></canvas>
+    <div class="row row-cols-2">
 
+            <div class="col">
+            
+                <canvas id="myChart" width="20" height="15"></canvas>
+            
+            </div>
+
+            {% if clashTrackFreq|length >= 1 %}
+            <div class="col">
+            
+                <canvas id="myChart2" width="20" height="15"></canvas>
+            
+            
+            </div>
+            {% endif %}
+
+    </div>
+    
+    
 </div>
+
+
 
 
 
@@ -110,6 +128,58 @@ var myChart = new Chart(ctx, {
         },
     }
 });
+
+
+
+var ctx = document.getElementById('myChart2').getContext('2d');
+
+
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [{% for freq in clashTrackFreq %} '{{ freq }}', {% endfor %}],
+        datasets: [{
+            label: '',
+            data: [{% for number in clashTrackNo %} '{{ number }}', {% endfor %}],
+            backgroundColor: [
+                'rgba(181, 228, 140)',
+                'rgba(52, 160, 164)',
+            ],
+            borderColor: [
+                'rgba(53, 53, 53)',
+            ],
+            borderWidth: 1,
+            hoverBorderWidth: 2,
+            hoverBorderColor: 'rgba(22, 26, 29)',
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'EQ Instances'
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: false,
+            },
+            title: {
+                display: true,
+                text: "Clashing Frequencies for Track",
+                font: {
+                    size: 20,
+                },
+            },
+        }
+    }
+});
+
+
 </script>
 
 

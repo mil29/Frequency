@@ -97,12 +97,41 @@ def instrument_detail(request, track_slug, id):
     eq_boost_all = EQ.objects.filter(track_id=track.id)
     track_boost = eq_boost_all.aggregate(Sum('boost'))
     track_cut = eq_boost_all.aggregate(Sum('cut'))
+
+
+    # Look at eq_detail view for more info on the code below , this code extracts the occurrence of certain frequencies 
+    f = 1
+    a = -10000
+    b = 25000
+    d = [x * f for x in range(a,b,50)]
+
+    frequencies = EQ.objects.filter(track_id=track.id).values_list('frequency', flat=True)
+
+    clashing_freq = []
+    for num in d:
+        for freq in frequencies:
+            y = num + 50
+            if freq in range(num, y) and num != 0:
+                clashing_freq.append(num)
+            continue
+    clashCounter = Counter(clashing_freq)
+
+    clashTrackFreq = []
+    clashTrackNo = []
+    for key, value in clashCounter.items():
+        if value > 1:
+            clashTrackFreq.append(key)
+            clashTrackNo.append(value)
+
+
     if my_inst.exists():
         context = {
             'instruments': my_inst,
             'track': track,
             'track_boost': track_boost,
             'track_cut': track_cut,
+            'clashTrackFreq': clashTrackFreq,
+            'clashTrackNo': clashTrackNo,
         }
         return render(request, 'feed/instrument_detail.html', context)
     else:
@@ -130,7 +159,7 @@ def eq_detail(request, track_slug, instrument_slug, id):
 
     #  this will find the frequency entries within the model for a particular instrument a give a back a list
     frequencies = EQ.objects.filter(instrument_id=instrument.id).values_list('frequency', flat=True)
-
+    
     #  this loops through the list above called d which is a large range of numbers spaced by 50 and also loops through the frequency entries in the model for the instrument checks whether the entry is within a range of 50 and adds to list called clashing_freq , the the counter counts the number of times a entry comes up in the list 'clashCounter'
     clashing_freq = []
     for num in d:

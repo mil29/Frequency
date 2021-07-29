@@ -1,3 +1,6 @@
+body {
+    background-color: rgb(227, 231, 229);
+}
 .profile-img {
     flex-shrink: 0;
     height: 200px;
@@ -37,6 +40,11 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+    background-color: rgb(63, 58, 54);
+    color: rgb(149, 231, 18);
+}
+.links_card {
+    color: rgb(149, 231, 18);
 }
 
 #id_description {
@@ -58,4 +66,13 @@ input#boostRange {
 }
 input#cutRange {
     width: 100%;
+}
+#boostdemo, #cutdemo, #frequencydemo {
+    font-size: 24px;
+    font-family: sans-serif;
+    color: rgb(149, 231, 18);
+}
+.db_bar {
+    background-color: rgb(63, 58, 54);
+    color: azure;
 }

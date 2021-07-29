@@ -17,13 +17,15 @@
                            {{ form.description }}
                            <h5>Frequency</h5>
                            <input type="text" id='frequencyInput' placeholder='Hz - kHz'>
-                           <p><span id="frequencydemo" class="hidden"></span></p>
+                           <p class="db_bar"><span id="frequencydemo"></span></p>
                            {{ form.frequency }} 
+                           <br><br><br><br>
+
                            <h5>Boost</h5>
-                           <p><span id="boostdemo"></span> db</p>
+                           <p class="db_bar"><span id="boostdemo"></span> db</p>
                            {{ form.boost }}
                            <h5>Cut</h5>
-                           <p><span id="cutdemo"></span> db</p>
+                           <p class="db_bar"><span id="cutdemo"></span> db</p>
                            {{ form.cut }}
 
 
