@@ -26,7 +26,7 @@ class Instrument(models.Model):
 
 
 class EQ(models.Model):
-    frequency   = models.DecimalField(decimal_places=0, max_digits=20)
+    frequency   = models.IntegerField()
     description = models.TextField(max_length=250, null=True, blank=True) 
     boost       = models.DecimalField(decimal_places=2, max_digits=10, default=0)
     cut         = models.DecimalField(decimal_places=2, max_digits=10, default=0)

@@ -103,15 +103,16 @@ def instrument_detail(request, track_slug, id):
     f = 1
     a = -10000
     b = 25000
-    d = [x * f for x in range(a,b,50)]
+    d = [x * f for x in range(a,b,100)]
 
     frequencies = EQ.objects.filter(track_id=track.id).values_list('frequency', flat=True)
 
     clashing_freq = []
     for num in d:
         for freq in frequencies:
+            x = num - 50
             y = num + 50
-            if freq in range(num, y) and num != 0:
+            if freq in range(x, y) and num != 0:
                 clashing_freq.append(num)
             continue
     clashCounter = Counter(clashing_freq)
@@ -154,7 +155,7 @@ def eq_detail(request, track_slug, instrument_slug, id):
     f = 1
     a = -10000
     b = 25000
-    d = [x * f for x in range(a,b,50)]
+    d = [x * f for x in range(a,b,100)]
     # print(d)
 
     #  this will find the frequency entries within the model for a particular instrument a give a back a list
@@ -164,8 +165,9 @@ def eq_detail(request, track_slug, instrument_slug, id):
     clashing_freq = []
     for num in d:
         for freq in frequencies:
+            x = num - 50
             y = num + 50
-            if freq in range(num, y) and num != 0:
+            if freq in range(x, y) and num != 0:
                 clashing_freq.append(num)
             continue
     # print(clashing_freq)
@@ -212,3 +214,4 @@ def track_delete(request, id):
     inst_obj = get_object_or_404(Track, id=id)
     inst_obj.delete()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+

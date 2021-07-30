@@ -120,7 +120,7 @@ var myChart = new Chart(ctx, {
             },
             title: {
                 display: true,
-                text: "Total for all Tracks (db)",
+                text: "Total Boost & Cut for all Tracks (db)",
                 font: {
                     size: 20,
                 },
@@ -158,6 +158,7 @@ var myChart = new Chart(ctx, {
         scales: {
             y: {
                 beginAtZero: true,
+                max: 10,
                 title: {
                     display: true,
                     text: 'EQ Instances'
