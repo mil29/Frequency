@@ -49,11 +49,15 @@
 
     <div class="row row-cols-2">
 
+            {% if clashTrackFreq|length >= 1 %}
+
             <div class="col">
             
                 <canvas id="myChart" width="20" height="15"></canvas>
             
             </div>
+
+            {% endif %}
 
             {% if clashTrackFreq|length >= 1 %}
             <div class="col">

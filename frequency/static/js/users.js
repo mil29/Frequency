@@ -1,3 +1,7 @@
+$(document).ready(function() {
+
+
+
 var frequencyslider = document.getElementById("frequencyRange");
 var frequencyoutput = document.getElementById("frequencydemo");
 var boostslider = document.getElementById("boostRange");
@@ -9,13 +13,12 @@ var frequencyInput = document.getElementById("frequencyInput");
 
 
 
-frequencyoutput.innerHTML = frequencyslider.value;
+frequencyoutput.innerHTML = frequencyslider.value + ' Hz';
 boostoutput.innerHTML = boostslider.value;
 cutoutput.innerHTML = cutslider.value;
 
 
 frequencyslider.oninput = function() { // when frequency slider is moved css removes hidden state and adjusts frequencyoutput html with either Hz or kHz
-    $(frequencyoutput).removeClass("hidden");
 
     if (this.value >= 1000){
         frequencyoutput.innerHTML = this.value +' kHz';
@@ -46,4 +49,4 @@ cutslider.oninput = function() {   // shows the cut value
 }
 
 
-
+});

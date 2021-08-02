@@ -8,6 +8,7 @@ from django.http import HttpResponseRedirect
 from django.db.models import Sum
 from collections import Counter
 
+
 @login_required
 def home(request):
     user = request.user
@@ -101,11 +102,12 @@ def instrument_detail(request, track_slug, id):
 
     # Look at eq_detail view for more info on the code below , this code extracts the occurrence of certain frequencies 
     f = 1
-    a = -10000
-    b = 25000
+    a = 20
+    b = 20000
     d = [x * f for x in range(a,b,100)]
 
     frequencies = EQ.objects.filter(track_id=track.id).values_list('frequency', flat=True)
+    
 
     clashing_freq = []
     for num in d:
@@ -153,8 +155,8 @@ def eq_detail(request, track_slug, instrument_slug, id):
 
     # this code below sets a range in a and b and the in d loops through the range every 50 and creates a list in d
     f = 1
-    a = -10000
-    b = 25000
+    a = 20
+    b = 20000
     d = [x * f for x in range(a,b,100)]
     # print(d)
 
