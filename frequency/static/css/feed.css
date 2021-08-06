@@ -34,6 +34,12 @@ body {
     display: inline-flex;
     justify-content: space-between;
 }
+@media screen and (max-width: 750px) {
+    .profile-links {  /* profile links */
+        height: fit-content;
+        display: block;
+    }
+}
 
 .one-track {
     height: 250px;

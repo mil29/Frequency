@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .authentication_card {
     text-align: center;
 }
@@ -24,3 +28,6 @@ input {
     text-align: center;
 }
 
+textarea {
+    width: 80%;
+}

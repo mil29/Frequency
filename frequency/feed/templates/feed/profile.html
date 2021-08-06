@@ -33,10 +33,10 @@
     </div>
 </div>
 
-<div class="container profile">
+<div class="container profile-link-cont">
     <div class="row">
     <div class="col-12 col-md-11 col-lg-8 mx-auto">
-        <div class="card">
+        <div class="card profile-card">
             <div class="card-body align-items-center profile-links">
 
                 {% if profile|length >= 1 %}
@@ -51,7 +51,6 @@
                 <br>
                 
                 
-                <br>
                 
                 <a href="{% url 'track_detail' user.slug %}"><b>My Tracks</b></a>
                 <br>
