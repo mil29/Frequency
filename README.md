@@ -9,7 +9,7 @@ A simple music mixing application that allows a user to register and login to th
 5. Users can add as many EQ instances as they like. 
 6. Users finally get total levels of boost and cut within each track and instrument and if there is more than 1 EQ at a certain frequency. 
 7. Result for total boost or cut for instrument and tracks are displayed with Chart.js.
-8. If more than 1 EQ instance is boosted or cut at same frequency Chart.js displays the information.
+8. If more than 1 EQ instance is boosted or cut at same frequency Chart.js displays this information.
 
 ## Demo
 https://musicmixingguide.herokuapp.com/login/?next=/
