@@ -1,7 +1,7 @@
 
 # Frequency
 
-A simple music mixing application that allows a user to register and login to their personal profile page, users can do the following:
+A simple music mixing Django application that allows a user to register and login to their personal profile page, users can do the following:
 1. Add a personal bio.
 2. Create track instances within their profile with the song and artist title info. 
 3. Create a instrument instance inside of the track instance.
