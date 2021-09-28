@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+.authentication_card {
+    text-align: center;
+}
+#hint_id_password2 {
+    visibility: hidden;
+}
+
+.authentication_card {
+    background-color: rgb(60, 46, 72);
+}
+.card-signin {
+    background-color: rgb(198, 206, 203);
+}
+
+input {
+    width: 50%;
+}
+.control-label {
+    margin: 15px;
+}
+
+.user_create_forms {
+    background-color: rgb(60, 46, 72);
+    text-align: center;
+}
+
+textarea {
+    width: 80%;
+}
