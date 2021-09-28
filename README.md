@@ -12,7 +12,7 @@ A simple music mixing Django application that allows a user to register and logi
 8. If more than 1 EQ instance is boosted or cut at same frequency Chart.js displays this information.
 
 ## Demo
-https://musicmixingguide.herokuapp.com/login/?next=/
+https://musicmixingguide.herokuapp.com
 
   
 ## Technologies used
