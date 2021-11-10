@@ -14,6 +14,10 @@ A simple music mixing Django application that allows a user to register and logi
 ## Demo
 https://musicmixingguide.herokuapp.com
 
+test account login: <br> <br>
+email: test@test.com <br>
+password: password3311
+
   
 ## Technologies used
 
