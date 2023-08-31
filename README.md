@@ -1,5 +1,5 @@
 
-# Frequency
+# Frequency  (Python/Django Application)
 
 A simple music mixing Django application that allows a user to register and login to their personal profile page, users can do the following:
 1. Add a personal bio.
